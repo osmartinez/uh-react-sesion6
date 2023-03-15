@@ -1,4 +1,6 @@
 import { Container } from "react-bootstrap";
+import ImagenGato from "../assets/images/gato.jpg"
+
 
 export default function HomePage(){
 
