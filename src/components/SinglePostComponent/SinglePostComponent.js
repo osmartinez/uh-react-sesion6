@@ -12,7 +12,7 @@ const SinglePostComponent = () => {
     return (
       <Bars height={100}
         width={100}>
-
+          
       </Bars>
     )
   }

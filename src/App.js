@@ -1,13 +1,16 @@
 
-import { Route, Routes } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import NavigationComponent from './components/NavigationComponent/NavigationComponent'
 import AboutPage from './pages/AboutPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import PostsPage from './pages/PostsPage';
+import ProfilePage from './pages/ProfilePage';
 import SinglePostPage from './pages/SinglePostPage';
 
 function App() {
+  const {user} = useSelector((state)=> state.AuthReducer)
   return (
     <div className="App">
       <NavigationComponent></NavigationComponent>
@@ -17,6 +20,7 @@ function App() {
         <Route exact path="/about" element={<AboutPage/>}></Route>
         <Route exact path="/login" element={<LoginPage/>}></Route>
         <Route exact path="/post/:id" element={<SinglePostPage/>}></Route>
+        <Route exact path="/profile" element={user && user.id?<ProfilePage/>: <Navigate to="/login" replace></Navigate>}></Route>
       </Routes>
     </div>
   );
