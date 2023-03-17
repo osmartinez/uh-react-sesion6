@@ -15,6 +15,7 @@ const LoginComponent = () => {
   const dispatch = useDispatch()
 
   function tryLogin() {
+    // es importante mantener las keys del objeto que nos pida la API
     dispatch(doLogin({ username: username, password: password }))
   }
 
