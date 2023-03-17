@@ -1,12 +1,18 @@
 import {
     GET_POSTS,
     GET_POSTS_OK,
-    GET_POSTS_FAIL
+    GET_POSTS_FAIL,
+
+    GET_SINGLE_POST,
+    GET_SINGLE_POST_OK,
+    GET_SINGLE_POST_FAIL
 } from './actionTypes'
 
 const initialState = {
     posts: [],
     loadingPosts: false,
+    post: {},
+    loadingSinglePost: false,
     error: {
         message: ""
     }
@@ -27,6 +33,18 @@ export default function PostsReducer(state = initialState, action) {
             state = {... state, loadingPosts: false, posts: [], error: {message: action.payload}}
             break
 
+
+        case GET_SINGLE_POST:
+            state = {...state, loadingSinglePost: true}
+            break
+
+        case GET_SINGLE_POST_OK:
+            state = {... state, loadingSinglePost: false, post: action.payload}
+            break
+
+        case GET_SINGLE_POST_FAIL:
+            state = {... state, loadingSinglePost: false, post: {}, error: {message: action.payload}}
+            break
         default:
             break
     }
