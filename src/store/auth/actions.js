@@ -2,7 +2,11 @@ import axios from "axios"
 import{
     DO_LOGIN,
     DO_LOGIN_OK,
-    DO_LOGIN_FAIL
+    DO_LOGIN_FAIL,
+
+    DO_LOGOUT,
+    DO_LOGOUT_OK,
+    DO_LOGOUT_FAIL,
 } from "./actionTypes"
 
 
@@ -13,6 +17,12 @@ export function actionDoLogin(loginData){
     }
 }
 
+export function actionDoLogout(){
+    return{
+        type: DO_LOGOUT
+    }
+}
+
 export function actionDoLoginOk(userDetails){
     return{
         type: DO_LOGIN_OK,
@@ -20,9 +30,22 @@ export function actionDoLoginOk(userDetails){
     }
 }
 
+export function actionDoLogoutOk(){
+    return {
+        type: DO_LOGOUT_OK,
+    }
+}
+
 export function actionDoLoginFail(error){
     return{
         type: DO_LOGIN_FAIL,
+        payload: error
+    }
+}
+
+export function actionDoLogoutFail(error){
+    return{
+        type: DO_LOGOUT_FAIL,
         payload: error
     }
 }
@@ -39,5 +62,16 @@ export function doLogin(userData){
             dispatch(actionDoLoginFail(error))
         }
       
+    }
+}
+
+export function doLogout(){
+    return (dispatch)=>{
+        try{
+            dispatch(actionDoLogout())
+            dispatch(actionDoLogoutOk())
+        }catch(error){
+            dispatch(actionDoLogoutFail(error))
+        }
     }
 }

@@ -1,12 +1,24 @@
 import {
     DO_LOGIN,
     DO_LOGIN_OK,
-    DO_LOGIN_FAIL
+    DO_LOGIN_FAIL,
+
+    DO_LOGOUT,
+    DO_LOGOUT_OK,
+    DO_LOGOUT_FAIL
 } from "./actionTypes"
+
+function recoverUser(){
+    try{
+       return JSON.parse(localStorage.getItem("_user"))
+    }catch(err){
+        return {}
+    }
+}
 
 const initialState = {
     loadingLogin: false,
-    user: {},
+    user: recoverUser(),
     error: {
         message: ""
     }
@@ -24,6 +36,14 @@ export default function AuthReducer(state = initialState, action) {
 
         case DO_LOGIN_FAIL:
             state = { ... state, loadingLogin: false, user: {}}
+            break
+
+        case DO_LOGOUT:
+            state = {... state}
+            break
+
+        case DO_LOGOUT_OK:
+            state = {... state, user: {}}
             break
     }
     return state
